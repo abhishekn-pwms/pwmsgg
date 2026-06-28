@@ -1,20 +1,13 @@
 const APP_BASE = (() => {
 
-    alert(window.location.hostname)
+    // alert(window.location.hostname)
 
     const path =
         window.location.pathname;
 
     if (
         window.location.hostname ===
-        "abhishekn-pwms.github.io/PWMS2"
-    ) {
-        return "/PWMS2";
-    }
-
-    else if (
-        window.location.hostname ===
-        "abhishekn-pwms.github.io/PWMSGG"
+        "abhishekn-pwms.github.io"
     ) {
         return "/PWMSGG";
     }
