@@ -27,8 +27,12 @@
                     </button>
                 </div>
 
-                <div class="toolbar">
+                                <!-- Split layout configuration parameters -->
+                <div class="toolbar-split-row">
                     <input type="search" id="searchText" class="search-box" placeholder="Search Task Description..." onkeyup="refreshTaskLogView()">
+                    <select id="activityStatusFilter" onchange="refreshTaskLogView()"></select>
+                </div>
+                <div class="toolbar-split-row" style="margin-bottom: 12px;">
                     <select id="periodFilter" onchange="applyPeriodFilter()">
                         <option value="Today">Today</option>
                         <option value="This Week">This Week</option>
@@ -37,8 +41,8 @@
                     </select>
                     <input type="date" id="fromDate" onchange="refreshTaskLogView()">
                     <input type="date" id="toDate" onchange="refreshTaskLogView()">
-                    <select id="activityStatusFilter" onchange="refreshTaskLogView()"></select>
                 </div>
+                
 
                 <div style="margin-bottom:10px; display:flex; gap:20px; font-size:14px; font-weight:bold;">
                     <div id="totalRecords">Total Records: 0</div>
