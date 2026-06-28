@@ -110,7 +110,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 16px;
+    gap: 12px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#loggedInUser {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Ensure the header bar action targets don't artificially bloat header rows */
+#header .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    min-height: unset;
 }
 
 .menu-toggle {
@@ -128,7 +158,7 @@ body {
 .menu-toggle:hover { background: rgba(255, 255, 255, 0.15); }
 
 .app-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
-.user-area { display: flex; align-items: center; gap: 16px; font-size: 0.9rem; }
+
 
 /* Sidebar Navigation */
 .sidebar-menu { padding: 12px 0; }
@@ -239,6 +269,7 @@ input:focus, select:focus, textarea:focus {
 
 @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
+/**
 /* ==========================================================================
    5. NATIVE RESPONSIVE & MOBILE ENGINE (BREAKPOINT-BASED)
    ========================================================================== */
@@ -301,5 +332,72 @@ input:focus, select:focus, textarea:focus {
     /* Comfortable touch targets for mobile viewport */
     .btn, input, select, textarea, .menu-item, .menu-group-header {
         min-height: 44px;
+    }
+}
+**/
+
+/* ==========================================================================
+   5. NATIVE RESPONSIVE & MOBILE ENGINE (BREAKPOINT-BASED)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #header {
+        height: var(--header-height);
+    }
+
+    /* CRITICAL: Clean up header space constraints on mobile */
+    #loggedInUser {
+        display: none !important; /* Hides email address on mobile views to keep header razor-thin */
+    }
+
+    .user-area {
+        gap: 0;
+    }
+
+    #content { 
+        padding: 16px; 
+    }
+    
+    .page-header {
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .page-header .btn {
+        width: auto; /* Restores button sizing to prevent full-width stretching */
+    }
+
+    .toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .search-box {
+        width: 100% !important;
+    }
+    
+    /* CRITICAL: Force task cards to drop cleanly into a single responsive column */
+    .task-date-group {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .time-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Scales typography up nicely on real device screens */
+    .btn, input, select, textarea, .menu-item, .menu-group-header {
+        min-height: 44px;
+        font-size: 1rem !important; 
     }
 }
