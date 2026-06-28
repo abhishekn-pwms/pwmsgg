@@ -1,8 +1,68 @@
-Date : Sun, 28-Jun-2026
-------------------
+Date : Mon, 29-Jun-2026
 
-PWMS-GG v0.1 For GG
-------------------
+\------------------
+
+
+
+Release PWMSGG v1
+
+\---
+
+
+
+\## 🚀 Core Features \& Modules
+
+
+
+\### 1. Unified Mobile-Responsive UI
+
+\* \*\*Fluid Layout Framework:\*\* Built using a flexible, dynamic structure (`.app-body-container`) that ensures a sticky top header and a bottom footer that never clips or collides with content.
+
+\* \*\*Modern Aesthetic:\*\* Transitioned from raw monospace fonts to a crisp, variable system sans-serif font stack with refined drop shadows, modern borders, and smooth transitions.
+
+\* \*\*Touch-First Ergonomics:\*\* All interactive buttons, fields, selects, and menus maintain a minimum height of `44px` on mobile, eliminating cramped tap targets.
+
+\* \*\*Collapsible Sidebar:\*\* Dynamically transitions from a left-docked desktop menu to a clean, space-saving slide-out overlay drawer on mobile viewports.
+
+
+
+\### 2. Core Operational Modules
+
+\* \*\*ToDo Management:\*\* Task logging with activity-linked records, due-date buckets (Overdue, Today, This Week, Future), open/completed toggle workflows, text filtering, and automated priority metric counters.
+
+\* \*\*Task Log Feed:\*\* Date-grouped grid layout displaying logged durations, times, and structured activity context fields alongside custom inline activity creation mechanisms.
+
+\* \*\*Review Reporting \& Analysis:\*\* Real-time summary metrics for active pipeline tasks and work hour distribution tracking across your portfolios utilizing self-collapsing adaptive dashboard card grids.
+
+\* \*\*Masters Configurations:\*\* Complete lifecycle management setups across \*\*Portfolio\*\*, \*\*Project\*\*, \*\*Milestone\*\*, and \*\*Activity\*\* hierarchies with structured table container safeguards to handle overflowing mobile content seamlessly.
+
+
+
+\---
+
+
+
+\## 🛠️ System Architecture \& Stack
+
+
+
+\* \*\*Frontend:\*\* Semantic HTML5, Modular JavaScript (ES6+), and Clean CSS Variables (`:root` token mapping).
+
+\* \*\*Database \& Backend:\*\* Supabase (Real-time DB \& View Schemas).
+
+\* \*\*Authentication:\*\* Google OAuth explicitly restricted to an approved list of digital profiles.
+
+\* \*\*Deployment Setup:\*\* GitHub Pages serving production assets out of the `/PWMS2` routing base directory.
+
+
+
+\------------------------------------
+
+Date : Sun, 28-Jun-2026
+
+\------------------
+
+
 
 Release PWMS v1.5 ToDo Module
 
