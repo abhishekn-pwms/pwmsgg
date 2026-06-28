@@ -12,11 +12,11 @@
     --text-main: #0f172a;        
     --text-muted: #475569;       
     
-    --sidebar-width: 260px;
-    --header-height: 60px;
-    --footer-height: 40px;
+    --sidebar-width: 240px;
+    --header-height: 50px;       /* Made header more compact */
+    --footer-height: 35px;       
     
-    --radius: 8px;
+    --radius: 6px;               /* Cleaner, tighter borders */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -34,9 +34,10 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--background);
     color: var(--text-main);
-    line-height: 1.5;
+    line-height: 1.4;
+    font-size: 0.9rem;            /* Reduced baseline font layout size */
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Prevents whole-page shaking/pinching layout bugs */
+    overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -72,14 +73,14 @@ body {
     width: var(--sidebar-width);
     background: var(--surface);
     border-right: 1px solid var(--border);
-    transition: transform 0.3s ease, width 0.3s ease;
+    transition: transform 0.25s ease, width 0.25s ease;
 }
 
 #content {
     flex: 1;
-    padding: 24px;
+    padding: 16px;              /* Shrunk spacing bounds */
     background-color: var(--background);
-    min-width: 0; /* Critical layout safeguard for flexing data elements */
+    min-width: 0;
 }
 
 #footer {
@@ -90,10 +91,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     width: 100%;
 }
 
+/* Unified Sidebar Hidden Configurations Everywhere */
 .sidebar-hidden #sidebar {
     width: 0px;
     overflow: hidden;
@@ -108,49 +110,50 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
+    padding: 0 14px;
 }
 
 .menu-toggle {
     border: none;
     background: transparent;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    padding: 8px;
+    padding: 6px;
     display: flex;
     align-items: center;
 }
 
-.app-title { font-size: 1.25rem; font-weight: 700; }
-.user-area { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+.app-title { font-size: 1.1rem; font-weight: 700; }
+.user-area { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
 
-/* Sidebar */
-.sidebar-menu { padding: 12px 0; }
+/* Sidebar Navigation Text Trimming */
+.sidebar-menu { padding: 8px 0; }
 .menu-item, .menu-group-header {
-    padding: 12px 20px;
+    padding: 8px 16px;
     cursor: pointer;
     color: var(--text-muted);
     font-weight: 500;
+    font-size: 0.85rem;
 }
 .menu-item:hover { background: var(--background); color: var(--text-main); }
 .menu-item.active {
     background: #eff6ff;
     color: var(--primary);
     font-weight: 600;
-    border-left: 4px solid var(--primary);
+    border-left: 3px solid var(--primary);
 }
 
-/* Page Structures & Forms */
-.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 12px; }
-.page-title { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
-.toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+/* Page Control Typography Adjustments */
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px; }
+.page-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
+.toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
 
 input, select, textarea {
-    padding: 10px 14px;
+    padding: 6px 10px;         /* Tighter input padding fields */
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     background: var(--surface);
     color: var(--text-main);
     width: 100%;
@@ -160,9 +163,9 @@ input, select, textarea {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 16px;
+    padding: 6px 12px;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     border-radius: var(--radius);
     border: none;
     cursor: pointer;
@@ -171,7 +174,7 @@ input, select, textarea {
 .btn-secondary { background: var(--border); color: var(--text-muted); }
 .btn-danger { background: var(--danger); color: white; }
 
-/* 🛡️ DATA TABLE RESPONSIVE WRAPPER ENGINE */
+/* 🛡️ DATA TABLE RESPONSIVE ENGINE */
 .table-container { 
     width: 100%;
     overflow-x: auto; 
@@ -179,36 +182,35 @@ input, select, textarea {
     border-radius: var(--radius); 
     box-shadow: var(--shadow-sm); 
     background: var(--surface);
-    -webkit-overflow-scrolling: touch; /* Butter-smooth momentum scrolling on iOS/Android */
+    -webkit-overflow-scrolling: touch;
 }
 
 .data-table { 
     width: 100%; 
     border-collapse: collapse; 
     text-align: left; 
-    font-size: 0.75rem;
-    white-space: nowrap; /* Keeps column layout structured beautifully inside scroll maps */
+    font-size: 0.82rem;         /* Crisp, smaller text footprint for data metrics */
+    white-space: nowrap; 
 }
-.data-table th { background: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 12px 16px; border-bottom: 1px solid var(--border); }
-.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-main); }
+.data-table th { background: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-main); }
 
-/* Card Feeds */
-.form-card, .task-card { background: var(--surface); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 12px; }
-.task-date-header { font-size: 1.0rem; font-weight: 700; color: var(--primary); margin: 20px 0 10px 0; }
-.task-date-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+/* Card Components */
+.form-card, .task-card { background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 10px; }
+.task-date-header { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 14px 0 6px 0; }
+.task-date-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
 
-/* Todo Specifics */
-.todo-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; }
-.todo-checkbox { font-size: 1.3rem; cursor: pointer; user-select: none; line-height: 1; }
-.todo-text { flex: 1; font-size: 1rem; }
-.todo-completed { text-decoration: line-through; color: var(--secondary); }
+/* Todo List Items */
+.todo-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 6px; }
+.todo-checkbox { font-size: 1.1rem; cursor: pointer; user-select: none; line-height: 1; }
+.todo-text { flex: 1; font-size: 0.88rem; }
 
 /* Modals */
-.modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.4); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 16px; }
-.modal-content { background: var(--surface); width: 100%; max-width: 550px; padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+.modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.4); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 12px; }
+.modal-content { background: var(--surface); width: 100%; max-width: 500px; padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow-md); }
 
 /* ==========================================================================
-   5. NATIVE RESPONSIVE Engine — MOBILE MASTER OVERRIDES
+   5. NATIVE RESPONSIVE ENGINE — MOBILE MASTER OVERRIDES
    ========================================================================== */
 @media (max-width: 768px) {
     #sidebar {
@@ -216,46 +218,26 @@ input, select, textarea {
         top: var(--header-height);
         left: 0;
         bottom: 0;
-        width: 280px;
+        width: 240px;
         z-index: 2000;
+        transform: translateX(-100%); /* Closed by default on screen open */
+        transition: transform 0.25s ease;
+    }
+
+    /* Pull drawer out only when class state is actively toggled */
+    .sidebar-hidden #sidebar {
         transform: translateX(-100%);
     }
-
-    .sidebar-hidden #sidebar {
+    
+    /* When layout is NOT hidden (meaning sidebar class removed via click), show it */
+    .app-layout:not(.sidebar-hidden) #sidebar {
         transform: translateX(0);
-        width: 280px;
     }
 
-    #content { padding: 12px; }
+    #content { padding: 10px; }
 
-    /* 🛡️ Hide long profile string on mobile to guarantee a razor-thin header bar */
     #loggedInUser {
         display: none !important;
     }
 
-    .page-header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .page-title {
-        font-size: 1.2rem;
-    }
-
-    .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-    }
-
-    .task-date-group {
-        grid-template-columns: 1fr !important; /* Forces Task Log cards to stack perfectly */
-    }
-
-    /* Standardizes touch targets to feel large and responsive like the ToDo view */
-    .btn, input, select, textarea, .menu-item, .menu-group-header {
-        min-height: 44px;
-        font-size: 1rem !important;
-    }
-}
+    .page-header
