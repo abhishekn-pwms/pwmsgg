@@ -2,21 +2,24 @@
    1. VARIABLES & DESIGN TOKENS
    ========================================================================== */
 :root {
-    --primary: #1e3a8a;          
+    /* Color Palette */
+    --primary: #1e3a8a;          /* Modern Indigo/Blue */
     --primary-hover: #1d4ed8;
-    --secondary: #64748b;        
-    --danger: #ef4444;           
-    --background: #f8fafc;       
-    --surface: #ffffff;          
-    --border: #e2e8f0;           
-    --text-main: #0f172a;        
-    --text-muted: #475569;       
+    --secondary: #64748b;        /* Cool Slate */
+    --danger: #ef4444;           /* Soft Red */
+    --background: #f8fafc;       /* Clean Light Gray */
+    --surface: #ffffff;          /* Card Background */
+    --border: #e2e8f0;           /* Soft Borders */
+    --text-main: #0f172a;        /* Dark Slate Text */
+    --text-muted: #475569;       /* Secondary Text */
     
+    /* Layout Dimensions */
     --sidebar-width: 240px;
-    --header-height: 50px;       /* Made header more compact */
-    --footer-height: 35px;       
+    --header-height: 50px;       /* Compact Header Bar */
+    --footer-height: 35px;       /* Compact Footer Bar */
     
-    --radius: 6px;               /* Cleaner, tighter borders */
+    /* Global Rounding & Shadows */
+    --radius: 6px;               /* Tight, clean border rounding */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -35,7 +38,7 @@ body {
     background-color: var(--background);
     color: var(--text-main);
     line-height: 1.4;
-    font-size: 0.9rem;            /* Reduced baseline font layout size */
+    font-size: 0.85rem;          /* Smaller crisp font layout baseline */
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
@@ -62,6 +65,7 @@ body {
     width: 100%;
 }
 
+/* Middle body wrapper container */
 .app-body-container {
     display: flex;
     flex: 1;
@@ -78,7 +82,7 @@ body {
 
 #content {
     flex: 1;
-    padding: 16px;              /* Shrunk spacing bounds */
+    padding: 16px;              /* Shrunk interior workspace margins */
     background-color: var(--background);
     min-width: 0;
 }
@@ -95,7 +99,7 @@ body {
     width: 100%;
 }
 
-/* Unified Sidebar Hidden Configurations Everywhere */
+/* Sidebar Hide Toggle states via class manipulation */
 .sidebar-hidden #sidebar {
     width: 0px;
     overflow: hidden;
@@ -105,6 +109,8 @@ body {
 /* ==========================================================================
    4. COMPONENTS
    ========================================================================== */
+
+/* Header Controls */
 .header-container {
     height: 100%;
     display: flex;
@@ -127,7 +133,7 @@ body {
 .app-title { font-size: 1.1rem; font-weight: 700; }
 .user-area { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
 
-/* Sidebar Navigation Text Trimming */
+/* Sidebar Navigation Items */
 .sidebar-menu { padding: 8px 0; }
 .menu-item, .menu-group-header {
     padding: 8px 16px;
@@ -136,45 +142,68 @@ body {
     font-weight: 500;
     font-size: 0.85rem;
 }
-.menu-item:hover { background: var(--background); color: var(--text-main); }
+.menu-item:hover, .menu-group-header:hover { background: var(--background); color: var(--text-main); }
 .menu-item.active {
     background: #eff6ff;
     color: var(--primary);
     font-weight: 600;
     border-left: 3px solid var(--primary);
 }
+.menu-group-header { font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; margin-top: 8px; }
+.submenu-item { padding-left: 28px; font-size: 0.8rem; }
 
-/* Page Control Typography Adjustments */
-.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px; }
-.page-title { font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
-.toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+/* Workspace Control Typography */
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px; }
+.page-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+
+/* Compact Centralized Toolbar Row Grid Engine */
+.toolbar { 
+    display: flex; 
+    gap: 6px; 
+    align-items: center; 
+    margin-bottom: 12px; 
+    width: 100%;
+}
+.toolbar > * {
+    flex: 1;
+    min-width: 0;               /* Prevents text items from forcing text wraps */
+}
+.toolbar input[type="search"], .toolbar .search-box {
+    flex: 1.5;                  /* Gives text search inputs slightly more room in the shared row space */
+}
 
 input, select, textarea {
-    padding: 6px 10px;         /* Tighter input padding fields */
+    padding: 4px 8px;           /* Tight compact padding entries */
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background: var(--surface);
     color: var(--text-main);
     width: 100%;
+    height: 32px;               /* Shrunk input line profiles */
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 12px;
+    padding: 4px 12px;
     font-weight: 500;
     font-size: 0.8rem;
     border-radius: var(--radius);
     border: none;
     cursor: pointer;
+    height: 32px;
 }
 .btn-primary { background: var(--primary); color: white; }
 .btn-secondary { background: var(--border); color: var(--text-muted); }
 .btn-danger { background: var(--danger); color: white; }
 
-/* 🛡️ DATA TABLE RESPONSIVE ENGINE */
+/* 🛡️ DATA TABLES METRIC ENGINE (COMPACT ADJUSTMENTS) */
 .table-container { 
     width: 100%;
     overflow-x: auto; 
@@ -189,30 +218,36 @@ input, select, textarea {
     width: 100%; 
     border-collapse: collapse; 
     text-align: left; 
-    font-size: 0.82rem;         /* Crisp, smaller text footprint for data metrics */
+    font-size: 0.8rem;          /* Smaller clean text view inside grid logs */
     white-space: nowrap; 
 }
-.data-table th { background: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border); }
-.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-main); }
+.data-table th { background: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text-main); vertical-align: middle; }
 
-/* Card Components */
+/* Card Feeds & Logs */
 .form-card, .task-card { background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 10px; }
-.task-date-header { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 14px 0 6px 0; }
+.task-date-header, .todo-group-header { font-size: 0.95rem; font-weight: 700; color: var(--primary); padding-bottom: 4px; margin: 16px 0 6px 0; border-bottom: 1px solid var(--border); }
 .task-date-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.task-duration { font-size: 0.75rem; font-weight: 600; color: var(--primary); }
+.task-description { font-size: 0.9rem; font-weight: 600; margin: 2px 0; }
+.task-activity { color: var(--text-muted); font-size: 0.8rem; }
 
-/* Todo List Items */
+/* Todo Elements */
 .todo-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 6px; }
 .todo-checkbox { font-size: 1.1rem; cursor: pointer; user-select: none; line-height: 1; }
-.todo-text { flex: 1; font-size: 0.88rem; }
+.todo-text { flex: 1; font-size: 0.85rem; }
+.todo-due { font-size: 0.75rem; color: var(--text-muted); background: var(--background); padding: 1px 4px; border-radius: 3px; margin-left: 6px; }
 
-/* Modals */
+/* Modals & Actions */
 .modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.4); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 12px; }
-.modal-content { background: var(--surface); width: 100%; max-width: 500px; padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+.modal-content { background: var(--surface); width: 100%; max-width: 480px; padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+.modal-actions { display: flex; gap: 10px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
 
 /* ==========================================================================
-   5. NATIVE RESPONSIVE ENGINE — MOBILE MASTER OVERRIDES
+   5. NATIVE RESPONSIVE ENGINE — MOBILE COMPACT OVERRIDES
    ========================================================================== */
 @media (max-width: 768px) {
+    /* 🛡️ FIXED SIDEBAR BUG: Hidden and pushed off-screen completely on mobile open */
     #sidebar {
         position: fixed;
         top: var(--header-height);
@@ -220,24 +255,52 @@ input, select, textarea {
         bottom: 0;
         width: 240px;
         z-index: 2000;
-        transform: translateX(-100%); /* Closed by default on screen open */
+        transform: translateX(-100%);
         transition: transform 0.25s ease;
     }
 
-    /* Pull drawer out only when class state is actively toggled */
+    /* Keep hidden when class selector is toggled active */
     .sidebar-hidden #sidebar {
         transform: translateX(-100%);
     }
     
-    /* When layout is NOT hidden (meaning sidebar class removed via click), show it */
+    /* Open sidebar only when the toggle interaction removes the hidden class */
     .app-layout:not(.sidebar-hidden) #sidebar {
         transform: translateX(0);
     }
 
     #content { padding: 10px; }
+    #loggedInUser { display: none !important; }
+    .page-title { font-size: 0.95rem; }
 
-    #loggedInUser {
-        display: none !important;
+    /* Enforces rigid inline rows for multi-line splits (Activity and Tasks) */
+    .toolbar-split-row {
+        display: flex !important;
+        gap: 6px !important;
+        margin-bottom: 6px !important;
+        width: 100% !important;
+    }
+    .toolbar-split-row > * {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+    .toolbar-split-row input[type="search"] {
+        flex: 1.5 !important;
     }
 
-    .page-header
+    .task-date-group {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .time-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    /* Maintain tight compact height targets for mobile inputs */
+    .btn, input, select, textarea, .menu-item, .menu-group-header {
+        min-height: 32px;
+        font-size: 0.8rem !important;
+    }
+}
