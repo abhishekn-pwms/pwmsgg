@@ -2,55 +2,70 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Review Reporting GG</title>
     <link rel="stylesheet" href="../css/pwms.css">
     <style>
-        /* Modern dashboard grids that naturally collapse on mobile viewports */
-        .dashboard-metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+        /* Forces strict single-row execution across summary components */
+        .summary-horizontal-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+        .summary-horizontal-row .form-card {
+            flex: 1;
+            margin-bottom: 0;
+            padding: 8px;
+            text-align: center;
+            min-width: 0; /* Prevents text elements from breaking grid blocks */
+        }
+        .summary-horizontal-row .form-card div {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .summary-horizontal-row h2 {
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+        .section-header {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 14px 0 8px 0;
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
 
     <div class="app-layout">
-
         <div id="header"></div>
 
         <div class="app-body-container">
-
             <div id="sidebar"></div>
 
             <div id="content">
 
                 <div class="page-header">
-                    <div class="page-title">
-                        Review GG (Reporting & Analysis)
-                    </div>
-                    <button class="btn btn-primary" onclick="loadReviewData()">
-                        Refresh
-                    </button>
+                    <div class="page-title">Review GG (Reporting & Analysis)</div>
+                    <button class="btn btn-primary" onclick="loadReviewData()">Refresh</button>
                 </div>
 
-                <div class="section-header">
-                    <strong>Activity Summary</strong>
-                </div>
-
-                <div class="dashboard-metrics-grid">
+                <div class="section-header">Activity Summary</div>
+                <div class="summary-horizontal-row">
                     <div class="form-card">
-                        <div>Open Activities</div>
+                        <div>Open</div>
                         <h2 id="openActivities">0</h2>
                     </div>
                     <div class="form-card">
-                        <div>In Progress</div>
+                        <div>Progress</div>
                         <h2 id="inProgressActivities">0</h2>
                     </div>
                     <div class="form-card">
-                        <div>Completed</div>
+                        <div>Done</div>
                         <h2 id="completedActivities">0</h2>
                     </div>
                     <div class="form-card">
@@ -59,31 +74,25 @@
                     </div>
                 </div>
 
-                <div class="section-header">
-                    <strong>Time Summary</strong>
-                </div>
-
-                <div class="dashboard-metrics-grid">
+                <div class="section-header">Time Summary</div>
+                <div class="summary-horizontal-row">
                     <div class="form-card">
                         <div>Today</div>
-                        <h2 id="todayHours">0.0 hrs</h2>
+                        <h2 id="todayHours">0.0h</h2>
                     </div>
                     <div class="form-card">
                         <div>This Week</div>
-                        <h2 id="weekHours">0.0 hrs</h2>
+                        <h2 id="weekHours">0.0h</h2>
                     </div>
                     <div class="form-card">
                         <div>This Month</div>
-                        <h2 id="monthHours">0.0 hrs</h2>
+                        <h2 id="monthHours">0.0h</h2>
                     </div>
                 </div>
 
-                <div class="section-header">
-                    <strong>Time By Portfolio</strong>
-                </div>
-
+                <div class="section-header">Time By Portfolio</div>
                 <div class="table-container">
-                    <table class="data-table" style="margin-bottom:20px;">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Portfolio</th>
@@ -95,12 +104,9 @@
                     </table>
                 </div>
 
-                <div class="section-header">
-                    <strong>Open Activities</strong>
-                </div>
-
+                <div class="section-header">Open Activities</div>
                 <div class="table-container">
-                    <table class="data-table" style="margin-bottom:20px;">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Activity</th>
@@ -113,10 +119,7 @@
                     </table>
                 </div>
 
-                <div class="section-header">
-                    <strong>Recent Work</strong>
-                </div>
-
+                <div class="section-header">Recent Work</div>
                 <div class="table-container">
                     <table class="data-table">
                         <thead>
@@ -132,9 +135,9 @@
                 </div>
 
             </div>
+        </div>
 
-        </div> <div id="footer"></div>
-
+        <div id="footer"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -145,8 +148,6 @@
     <script src="../js/components.js"></script>
     <script src="../js/app.js"></script>
     <script src="../js/review.js"></script>
-
     <script>initializeAppIcon();</script>
-
 </body>
 </html>
