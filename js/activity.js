@@ -320,7 +320,7 @@ function renderActivityGrid() {
         <tr>
 
             <td>
-                <font style="font-weight:bold;">
+                <font style="font-size=22px;font-weight:bold;">
                 ${item.activity_name}
                 </font>
             </td>
