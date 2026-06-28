@@ -1,5 +1,7 @@
 const APP_BASE = (() => {
 
+    alert(window.location.hostname)
+
     const path =
         window.location.pathname;
 
@@ -10,12 +12,20 @@ const APP_BASE = (() => {
         return "/PWMS2";
     }
 
-    elseif (
+    else if (
         window.location.hostname ===
         "abhishekn-pwms.github.io/PWMSGG"
     ) {
         return "/PWMSGG";
     }
+
+    else if (
+        window.location.hostname ===
+        "192.168.1.8"
+    ) {
+        return "";
+    }
+
 
     return "";
 
@@ -66,7 +76,7 @@ function initializeAppIcon() {
 
 function appUrl(path) {
 
-    alert(APP_BASE + path)
+    // alert(APP_BASE + path)
     return APP_BASE + path;
 }
 
