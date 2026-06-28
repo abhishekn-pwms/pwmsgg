@@ -27,21 +27,21 @@
                     </button>
                 </div>
 
+
+
                 <!-- Split into two row pairs on mobile viewports -->
-                <div class="toolbar-split-row">
+                <div class="toolbar">
                     <input type="search" id="searchText" class="search-box" placeholder="Search Activity..." onkeyup="renderActivityGrid()">
                     <select id="statusFilter" onchange="renderActivityGrid()">
                         <option value="Enabled" selected>Enabled</option>
                         <option value="Disabled">Disabled</option>
                         <option value="All">All</option>
                     </select>
-                </div>
-                <div class="toolbar-split-row" style="margin-bottom: 12px;">
                     <select id="activityStatusFilter" onchange="renderActivityGrid()"></select>
                     <select id="activityPriorityFilter" onchange="renderActivityGrid()"></select>
                 </div>
-                
-                
+
+
                 <div id="activityCount" style="margin-bottom:10px; color:#666; font-size:14px;"></div>
 
                 <div class="table-container">
