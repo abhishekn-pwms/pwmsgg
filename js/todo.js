@@ -30,6 +30,17 @@ document.addEventListener(
         await loadActivities();
 
         await loadTodos();
+
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
+
+        // 🚀 NEW: Auto-open form if launched from the universal accelerator button
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('action') === 'new') {
+            newTodo(); // Instantly fire your form modal open loop
+        }
+
     }
 );
 
@@ -1338,10 +1349,19 @@ document.addEventListener(
             event.key ===
             "Escape"
         ) {
-
             closeModal(
                 "todoModal"
             );
+        }
+
+        // 🚀 ENTER KEY SHORTCUT: Save ToDo form from keyboard
+        const modal = document.getElementById("todoModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Safe guard: Ignore Enter if the cursor is active inside the multi-line notes textarea box
+            if (event.key === "Enter" && document.activeElement.id !== "notes") {
+                event.preventDefault(); // Prevents default form quirk submissions
+                saveTodo(); // Triggers your save logic automatically!
+            }
         }
     }
 );

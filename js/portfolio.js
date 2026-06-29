@@ -12,6 +12,9 @@ document.addEventListener(
 
         await loadPortfolios();
 
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
     }
 );
 
@@ -501,18 +504,25 @@ async function enablePortfolio(
 }
 
 
+
+// ... Existing code at the bottom of portfolio.js ...
+
 document.addEventListener(
     "keydown",
     event => {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeModal(
-                "portfolioModal"
-            );
+        // 1. Existing Escape Key handler
+        if (event.key === "Escape") {
+            closeModal("portfolioModal"); //
         }
 
+        // 🚀 NEW: Check if the modal is currently open and user hits Enter
+        const modal = document.getElementById("portfolioModal");
+        if (modal && modal.style.display === "flex" || modal.style.display === "block") {
+            // Ignore Enter if the user is typing inside a multiline textarea description box
+            if (event.key === "Enter" && document.activeElement.id !== "description") {
+                event.preventDefault(); // Stop native page submissions or linebreaks
+                savePortfolio(); // Triggers your save logic automatically!
+            }
+        }
     }
 );

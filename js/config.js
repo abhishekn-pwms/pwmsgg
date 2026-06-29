@@ -85,7 +85,7 @@ function isMobile() {
 
 function getDefaultLandingPage() {
 
-    return "/pages/task-log.html";
+    return "/pages/dashboard.html";
 
 }
 

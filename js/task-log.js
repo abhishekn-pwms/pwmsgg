@@ -41,6 +41,17 @@ document.addEventListener(
                 updateCharacterCount
             );
 
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
+
+        // 🚀 NEW: Auto-open form if launched from the universal accelerator button
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('action') === 'new') {
+            newTaskLog(); // Instantly fire your form modal open loop
+        }
+
+
     }
 );
 
@@ -1387,11 +1398,20 @@ document.addEventListener(
         if (
             event.key === "Escape"
         ) {
-
             closeModal(
                 "taskLogModal"
             );
         }
 
+        // 🚀 ENTER KEY SHORTCUT: Save task log form from keyboard
+        const modal = document.getElementById("taskLogModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Safe guards: Don't trigger save if typing in description OR looking up an activity
+            const activeId = document.activeElement.id;
+            if (event.key === "Enter" && activeId !== "taskDescription" && activeId !== "activitySearch") {
+                event.preventDefault();
+                saveTaskLog();
+            }
+        }
     }
 );

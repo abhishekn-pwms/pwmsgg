@@ -24,6 +24,9 @@ document.addEventListener(
 
         await loadMilestones();
 
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
     }
 );
 
@@ -681,11 +684,19 @@ document.addEventListener(
         if (
             event.key === "Escape"
         ) {
-
             closeModal(
                 "milestoneModal"
             );
         }
 
+        // 🚀 ENTER KEY SHORTCUT: Save milestone form from keyboard
+        const modal = document.getElementById("milestoneModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Ignore Enter if cursor is inside description box
+            if (event.key === "Enter" && document.activeElement.id !== "description") {
+                event.preventDefault();
+                saveMilestone();
+            }
+        }
     }
 );

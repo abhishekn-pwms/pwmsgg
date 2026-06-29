@@ -16,6 +16,9 @@ document.addEventListener(
 
         await loadActivities();
 
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
     }
 );
 
@@ -725,11 +728,19 @@ document.addEventListener(
         if (
             event.key === "Escape"
         ) {
-
             closeModal(
                 "activityModal"
             );
         }
 
+        // 🚀 ENTER KEY SHORTCUT: Save activity form from keyboard
+        const modal = document.getElementById("activityModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Ignore Enter if cursor is inside description textarea box
+            if (event.key === "Enter" && document.activeElement.id !== "description") {
+                event.preventDefault();
+                saveActivity();
+            }
+        }
     }
 );

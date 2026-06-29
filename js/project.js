@@ -25,6 +25,9 @@ document.addEventListener(
 
         await loadProjects();
 
+        // 🚀 NEW: Instantly ready to search without clicking
+        document.getElementById("searchText")?.focus();
+
     }
 );
 
@@ -676,11 +679,19 @@ document.addEventListener(
         if (
             event.key === "Escape"
         ) {
-
             closeModal(
                 "projectModal"
             );
         }
 
+        // 🚀 ENTER KEY SHORTCUT: Save project form from keyboard
+        const modal = document.getElementById("projectModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Ignore Enter if the user is writing a long text description note
+            if (event.key === "Enter" && document.activeElement.id !== "description") {
+                event.preventDefault(); 
+                saveProject();
+            }
+        }
     }
 );
