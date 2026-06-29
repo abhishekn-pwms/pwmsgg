@@ -1,15 +1,36 @@
 /* ==========================================================================
+   A. CUSTOM COMPACT THEME SCROLLBARS
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 6px;  /* Thin vertical bars */
+    height: 6px; /* Thin horizontal table tracking bars */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Subtle slate tracker slider */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* Darkens slightly on active desktop scroll interaction */
+}
+
+/* ==========================================================================
    1. VARIABLES & DESIGN TOKENS
    ========================================================================== */
 :root {
     /* Color Palette */
-    --primary: #2563eb;          /* Modern Indigo/Blue */
+    --primary: #2563eb;          /* Modern Indigo/Blue Actions */
     --primary-hover: #1d4ed8;
     --secondary: #64748b;        /* Cool Slate */
     --danger: #ef4444;           /* Soft Red */
     --background: #f8fafc;       /* Clean Light Gray */
     --surface: #ffffff;          /* Card Background */
-    --border: #e2e8f0;           /* Soft Borders */
+    --border: #cbd5e1;           /* Crisper, highly visible border gray */
     --text-main: #0f172a;        /* Dark Slate Text */
     --text-muted: #475569;       /* Secondary Text */
     
@@ -173,21 +194,23 @@ body {
 }
 
 input, select, textarea {
-    padding: 4px 8px;           /* Tight compact padding entries */
+    padding: 4px 8px;           
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 0.8rem;
     background: var(--surface);
     color: var(--text-main);
     width: 100%;
-    height: 32px;               /* Shrunk input line profiles */
+    height: 32px;               
+    transition: border-color 0.15s ease, box-shadow 0.15s ease; /* Smooth visual transition */
 }
+
+/* 🎯 High-visibility focus state when clicking into a box */
 input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important; /* Soft blue outer halo glow */
 }
-
-
 
 /* ==========================================================================
    BUTTONS & SEMANTIC CONTRAST UPGRADES
@@ -207,11 +230,12 @@ input:focus, select:focus, textarea:focus {
 
 /* Clear, Vivid Primary Action Blue */
 .btn-primary { 
-    background-color: #2563eb; 
-    color: #ffffff; 
+    background-color: #64748b; /* Soft cool slate grey */
+    color: #ffffff;
 }
 .btn-primary:hover { 
-    background-color: #1d4ed8; 
+    background-color: #1d4ed8;
+    color: #ffffff;
     transform: scale(1.1);
 }
 
@@ -220,7 +244,14 @@ input:focus, select:focus, textarea:focus {
     background-color: transparent; 
     color: #dc2626; 
     border-color: #fca5a5; 
-    border-width:3px;
+    border-width: 1px;         /* Restored back to your original clean size */
+}
+
+/* --- Strategy C: Charcoal Header Base --- */
+:root {
+    --primary: #1e293b;          /* Sleek Dark Charcoal Grey for Header */
+    --primary-hover: #1d4ed8;    /* Keeps your active button operations blue */
+    /* ... rest of your tokens unchanged ... */
 }
 
 /* Combined Hover state for solid Delete targets & outlined row controls */
@@ -234,9 +265,9 @@ input:focus, select:focus, textarea:focus {
     transform: scale(1.2) !important;
 }
 
-
-
-/* 🛡️ DATA TABLES METRIC ENGINE (COMPACT ADJUSTMENTS) */
+/* ==========================================================================
+   🛡️ DATA TABLES METRIC ENGINE (COMPACT ADJUSTMENTS)
+   ========================================================================== */
 .table-container { 
     width: 100%;
     overflow-x: auto; 
@@ -254,8 +285,19 @@ input:focus, select:focus, textarea:focus {
     font-size: 0.8rem;          /* Smaller clean text view inside grid logs */
     white-space: nowrap; 
 }
-.data-table th { background: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+.data-table th { 
+    background: #f1f5f9; /* Darkened table header tint slightly for text visibility */
+    color: var(--text-muted); 
+    font-weight: 600; 
+    padding: 6px 10px; 
+    border-bottom: 2px solid var(--border); /* Slightly thicker base break under headers */
+}
 .data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text-main); vertical-align: middle; }
+
+/* 🚀 TARGETED ADDITION: Safe Alternate Zebra Banding for Row Tracking */
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8fafc !important;
+}
 
 /* Card Feeds & Logs */
 .form-card, .task-card { background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 10px; }
@@ -267,7 +309,7 @@ input:focus, select:focus, textarea:focus {
 
 /* Todo Elements */
 .todo-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 6px; }
-.todo-checkbox { font-size: 1.1rem; cursor: pointer; user-select: none; line-height: 1; }
+.todo-checkbox { font-size: 0.5rem; cursor: pointer; user-select: none; line-height: 1; }
 .todo-text { flex: 1; font-size: 0.85rem; }
 .todo-due { font-size: 0.75rem; color: var(--text-muted); background: var(--background); padding: 1px 4px; border-radius: 3px; margin-left: 6px; }
 
@@ -338,74 +380,221 @@ input:focus, select:focus, textarea:focus {
     }
 }
 
-
 /* ==========================================================================
    6. LOGIN PAGE
    ========================================================================== */
-
 .login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-
 .login-container {
-
     width: 400px;
-
     background: white;
-
     padding: 30px;
-
     border-radius: 8px;
-
-    box-shadow: 0 0 10px
-        rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 .login-container h1 {
-
     text-align: center;
-
     margin-bottom: 10px;
 }
-
 .login-container p {
-
     text-align: center;
-
     color: #666;
-
     margin-bottom: 30px;
 }
-
 .login-form {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 10px;
 }
-
 .login-form input {
-
     padding: 10px;
 }
-
 .login-form button {
-
     margin-top: 10px;
-
     padding: 12px;
-
     cursor: pointer;
 }
-
 #errorMessage {
-
     color: red;
-
     margin-top: 10px;
+}
+
+/* ==========================================================================
+   7. DYNAMIC STATUS & PRIORITY BADGES
+   ========================================================================== */
+td, .task-activity, .todo-due, h2 {
+    position: relative;
+}
+td:contains("Completed"), td:contains("Yes"), option[value="Completed"] {
+    color: #16a34a !important;
+    font-weight: 600;
+}
+td:contains("In Progress"), td:contains("Open") {
+    color: #ca8a04 !important;
+    font-weight: 600;
+}
+td:contains("Not Started"), td:contains("Disabled"), td:contains("No") {
+    color: #94a3b8 !important;
+}
+td:contains("Critical"), td:contains("High") {
+    color: #dc2626 !important;
+    font-weight: 700;
+}
+td:contains("Medium") {
+    color: #d97706 !important;
+    font-weight: 600;
+}
+td:contains("Low") {
+    color: #64748b !important;
+}
+
+/* ==========================================================================
+   8. MODERNIZE CHECKBOXES IN TODO PAGE UX
+   ========================================================================== */
+.todo-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0px !important; 
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+.todo-item:has(.todo-completed) .todo-checkbox,
+.todo-checkbox:contains("☑") {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    font-size: 12px !important;
+    color: white !important;
+}
+.todo-checkbox:contains("☑")::after {
+    content: "✓";
+    font-weight: bold;
+}
+.todo-item:hover .todo-checkbox {
+    border-color: #2563eb;
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   9. CARD & TABLE ROW INTERACTIVITY
+   ========================================================================== */
+.data-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+.data-table tbody tr:hover {
+    background-color: #f1f5f9 !important; 
+}
+.task-card, .form-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.task-card:hover, .form-card:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ==========================================================================
+   10. SINGLE-CLICK FLOATING ACTION BUTTON (For ToDo & Task-Log Pages)
+   ========================================================================== */
+.fab-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: #1e293b	;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.15s ease;
+}
+.fab-btn:hover { background-color: #1d4ed8; transform: scale(1.1); }
+.fab-btn:active { transform: scale(0.95); }
+
+/* ==========================================================================
+   11. MULTI-ACTION EXPANDABLE FLOATING ACCELERATOR (For All Other Pages)
+   ========================================================================== */
+.fab-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+}
+.fab-trigger {
+    width: 44px;
+    height: 44px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.fab-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(15px);
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.fab-container:hover .fab-options,
+.fab-container.active .fab-options {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.fab-container:hover .fab-trigger {
+    transform: rotate(135deg);
+    background-color: #1e293b;
+}
+.fab-sub-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-main);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.15s;
+}
+.fab-sub-btn:hover { background-color: #f8fafc; transform: scale(1.03); }
+
+@media (max-width: 768px) {
+    .fab-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 1.4rem; }
+    .fab-container { bottom: 16px; right: 16px; }
 }
