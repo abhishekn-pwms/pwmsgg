@@ -25,9 +25,12 @@ async function refreshFocusDashboard() {
     }
 }
 
+
+
+
+
 // 1. Fetch & Map Strategic Runway (Active Milestones)
 async function loadDashboardMilestones() {
-    // Queries your native milestone detail matrix
     const data = await getData("vw_milestone_details?enabled=eq.true&order=target_date.asc");
     dashboardMilestones = Array.isArray(data) ? data.filter(m => m.status !== "Completed" && m.status !== "Cancelled") : [];
     
@@ -42,10 +45,21 @@ async function loadDashboardMilestones() {
     }
 
     dashboardMilestones.forEach(item => {
-        const borderPriorityColor = item.status === "In Progress" ? "#ca8a04" : "#cbd5e1";
+        // Calculate remaining window
+        const today = new Date();
+        const target = new Date(item.target_date);
+        const daysRemaining = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+        const isAtRisk = daysRemaining <= 10 && daysRemaining >= 0;
+
+        const borderPriorityColor = isAtRisk ? "var(--danger)" : (item.status === "In Progress" ? "#ca8a04" : "#cbd5e1");
+        const customBackground = isAtRisk ? "#fef2f2" : "var(--background)";
+
         container.innerHTML += `
-            <div class="stream-item" style="border-left-color: ${borderPriorityColor};">
-                <font style="font-weight:bold; color:var(--text-main);">${item.milestone_name}</font>
+            <div class="stream-item" style="border-left-color: ${borderPriorityColor}; background: ${customBackground};">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <font style="font-weight:bold; color: ${isAtRisk ? "var(--danger)" : "var(--text-main)"};">${item.milestone_name}</font>
+                    ${isAtRisk ? `<span style="font-size:0.65rem; background:#fee2e2; padding:2px 4px; border-radius:4px; font-weight:800; color:var(--danger)">🚨 AT RISK</span>` : ""}
+                </div>
                 <div class="item-meta">
                     <span>${item.portfolio_name} | ${item.project_name}</span>
                     <span style="font-weight:600;">📅 ${formatDate(item.target_date)}</span>
@@ -55,9 +69,16 @@ async function loadDashboardMilestones() {
     });
 }
 
+
+
+
+
+
+
+
+
 // 2. Fetch & Map Action Desk (Open/Overdue ToDos)
 async function loadDashboardTodos() {
-    // Queries your specific vw_todo architecture layer
     const data = await getData("vw_todo?status=eq.Open&order=due_date.asc");
     dashboardTodos = Array.isArray(data) ? data : [];
     
@@ -71,25 +92,59 @@ async function loadDashboardTodos() {
         return;
     }
 
-    dashboardTodos.forEach(item => {
-        const todayStr = getToday();
-        const isOverdue = item.due_date && item.due_date < todayStr;
-        const borderStyleColor = isOverdue ? "var(--danger)" : "#2563eb";
-        const dateDisplayLabel = item.due_date ? formatDate(item.due_date) : "No Due Date";
+    const todayStr = getToday();
+    const urgentItems = dashboardTodos.filter(t => t.due_date && t.due_date <= todayStr);
+    const upcomingItems = dashboardTodos.filter(t => !t.due_date || t.due_date > todayStr);
 
-        container.innerHTML += `
-            <div class="stream-item" style="border-left-color: ${borderStyleColor};" onclick="window.location.href='todo.html'">
-                <font style="font-weight:600; color:var(--text-main);">${item.todo_text}</font>
-                <div class="item-meta">
-                    <span>⚡ ${item.activity_name}</span>
-                    <span style="color: ${isOverdue ? "var(--danger)" : "inherit"}; font-weight:bold;">
-                        ${isOverdue ? "⚠️ OVERDUE: " : ""} ${dateDisplayLabel}
-                    </span>
+    let html = "";
+
+    // Render Section A: Urgent Tasks
+    html += `<div style="font-weight:700; font-size:0.75rem; color:var(--danger); margin: 4px 0 6px 0;">🔥 URGENT DESK (TODAY / OVERDUE)</div>`;
+    if (urgentItems.length === 0) {
+        html += `<div style="padding:6px; font-size:0.8rem; color:#16a34a; text-align:center;">✨ No urgent actions!</div>`;
+    } else {
+        urgentItems.forEach(item => {
+            const isOverdue = item.due_date < todayStr;
+            html += `
+                <div class="stream-item" style="border-left-color: var(--danger); margin-bottom:6px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <font style="font-weight:600; color:var(--text-main); cursor:pointer;" onclick="window.location.href='todo.html'">${item.todo_text}</font>
+                        <span style="color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer; padding-left:10px;" onclick="quickLogToDo('${item.todo_id}', '${item.todo_text.replace(/'/g, "\\'")}', '${item.activity_id}')">⏱️ Log</span>
+                    </div>
+                    <div class="item-meta" onclick="window.location.href='todo.html'">
+                        <span>⚡ ${item.activity_name}</span>
+                        <span style="color:var(--danger); font-weight:bold;">${isOverdue ? "⚠️ OVERDUE" : "Due Today"}</span>
+                    </div>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
+
+    // Render Section B: Rest of the Pipeline
+    if (upcomingItems.length > 0) {
+        html += `<div style="font-weight:700; font-size:0.75rem; color:#64748b; margin: 12px 0 6px 0;">📅 UPCOMING & BACKLOG</div>`;
+        upcomingItems.forEach(item => {
+            const dateDisplayLabel = item.due_date ? formatDate(item.due_date) : "No Due Date";
+            html += `
+                <div class="stream-item" style="border-left-color: #2563eb; margin-bottom:6px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <font style="font-weight:600; color:var(--text-main); cursor:pointer;" onclick="window.location.href='todo.html'">${item.todo_text}</font>
+                        <span style="color:#2563eb; font-size:0.75rem; font-weight:700; cursor:pointer; padding-left:10px;" onclick="quickLogToDo('${item.todo_id}', '${item.todo_text.replace(/'/g, "\\'")}', '${item.activity_id}')">⏱️ Log</span>
+                    </div>
+                    <div class="item-meta" onclick="window.location.href='todo.html'">
+                        <span>⚡ ${item.activity_name}</span>
+                        <span>${dateDisplayLabel}</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    container.innerHTML = html;
 }
+
+
+
 
 // 3. Fetch & Map Velocity Track Stream (Recent Task Log Entries)
 async function loadDashboardTaskLogs() {
@@ -125,4 +180,15 @@ async function loadDashboardPerformanceCounters() {
         const timeSummary = data[0];
         document.getElementById("summaryToday").textContent = `${((timeSummary.today_minutes || 0) / 60).toFixed(1)} hrs`;
     }
+}
+
+
+// 🚀 NEW: Intercepts a ToDo item and forwards it straight to your Task Log popup template
+function quickLogToDo(todoId, todoText, activityId) {
+    if (window.event) {
+        window.event.stopPropagation(); // Prevents clicking the row from opening todo.html
+    }
+    sessionStorage.setItem("QUICK_LOG_DESC", `Action Complete: ${todoText}`);
+    sessionStorage.setItem("QUICK_LOG_ACTIVITY", activityId);
+    window.location.href = "task-log.html?action=new";
 }
