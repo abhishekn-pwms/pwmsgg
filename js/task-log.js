@@ -32,7 +32,7 @@ document.addEventListener(
 
         await loadTaskLogs();
 
-        document
+         document
             .getElementById(
                 "taskDescription"
             )
@@ -40,6 +40,27 @@ document.addEventListener(
                 "input",
                 updateCharacterCount
             );
+
+        // 🚀 NEW: Auto-fill fields if redirected from the Dashboard "Log" button
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('action') === 'new') {
+            newTaskLog(); 
+            
+            const quickDesc = sessionStorage.getItem("QUICK_LOG_DESC");
+            const quickActivity = sessionStorage.getItem("QUICK_LOG_ACTIVITY");
+            
+            if (quickDesc && quickActivity) {
+                document.getElementById("taskDescription").value = quickDesc;
+                document.getElementById("activityId").value = quickActivity;
+                activityChanged(); 
+                
+                sessionStorage.removeItem("QUICK_LOG_DESC");
+                sessionStorage.removeItem("QUICK_LOG_ACTIVITY");
+            }
+        }
+    }
+);
+
 
         // 🚀 NEW: Instantly ready to search without clicking
         document.getElementById("searchText")?.focus();
