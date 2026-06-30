@@ -1,8 +1,9 @@
+=== === === === === ===
 Date : Tue, 30-Jun-2026
+=== === === === === ===
 
+Release PWMS GG v1.6 Focus Dashboard View
 ------------------
-
-Release PWMSGG v1.6 Focus Dashboard View
 
 What's New
 This release focuses entirely on focus dashboard views technically optimized to support managing my work.
@@ -14,12 +15,12 @@ This release focuses entirely on focus dashboard views technically optimized to 
 * Focus Toggle
 
 
-
+=== === === === === ===
 Date : Mon, 29-Jun-2026
+=== === === === === ===
 
-------------------
-
-Release PWMSGG v1.5a UX Enhancements for Ease of Use & Initiated Dashboard View
+Release PWMS GG v1.5a UX Enhancements for Ease of Use & Initiated Dashboard View
+---------------------------
 
 This release focuses entirely on reducing execution friction, minimizing manual clicks, and optimization for desktop and mobile efficiency.
 
@@ -36,88 +37,56 @@ This release focuses entirely on reducing execution friction, minimizing manual 
 
 
 
----
-Release PWMSGG v1.04 Stable
----
+---------------------------
+Release PWMS GG v1.04 Stable
+---------------------------
 
 ## Core Features & Modules
 
 ### 1. Unified Mobile-Responsive UI
-***Fluid Layout Framework:** Built using a flexible, dynamic structure (`.app-body-container`) that ensures a sticky top header and a bottom footer that never clips or collides with content.
-***Modern Aesthetic:** Transitioned from raw monospace fonts to a crisp, variable system sans-serif font stack with refined drop shadows, modern borders, and smooth transitions.
-***Touch-First Ergonomics:** All interactive buttons, fields, selects, and menus maintain a minimum height of `44px` on mobile, eliminating cramped tap targets.
-***Collapsible Sidebar:** Dynamically transitions from a left-docked desktop menu to a clean, space-saving slide-out overlay drawer on mobile viewports.
+**Fluid Layout Framework:** Built using a flexible, dynamic structure (`.app-body-container`) that ensures a sticky top header and a bottom footer that never clips or collides with content.
+**Modern Aesthetic:** Transitioned from raw monospace fonts to a crisp, variable system sans-serif font stack with refined drop shadows, modern borders, and smooth transitions.
+**Touch-First Ergonomics:** All interactive buttons, fields, selects, and menus maintain a minimum height of `44px` on mobile, eliminating cramped tap targets.
+**Collapsible Sidebar:** Dynamically transitions from a left-docked desktop menu to a clean, space-saving slide-out overlay drawer on mobile viewports.
 
 
 ### 2. Core Operational Modules
+**ToDo Management:** Task logging with activity-linked records, due-date buckets (Overdue, Today, This Week, Future), open/completed toggle workflows, text filtering, and automated priority metric counters.
+**Task Log Feed:** Date-grouped grid layout displaying logged durations, times, and structured activity context fields alongside custom inline activity creation mechanisms.
+**Review Reporting & Analysis:** Real-time summary metrics for active pipeline tasks and work hour distribution tracking across your portfolios utilizing self-collapsing adaptive dashboard card grids.
+**Masters Configurations:** Complete lifecycle management setups across **Portfolio**, **Project**, **Milestone**, and **Activity** hierarchies with structured table container safeguards to handle overflowing mobile content seamlessly.
 
-***ToDo Management:** Task logging with activity-linked records, due-date buckets (Overdue, Today, This Week, Future), open/completed toggle workflows, text filtering, and automated priority metric counters.
-
-***Task Log Feed:** Date-grouped grid layout displaying logged durations, times, and structured activity context fields alongside custom inline activity creation mechanisms.
-
-***Review Reporting & Analysis:** Real-time summary metrics for active pipeline tasks and work hour distribution tracking across your portfolios utilizing self-collapsing adaptive dashboard card grids.
-
-***Masters Configurations:** Complete lifecycle management setups across **Portfolio**, **Project**, **Milestone**, and **Activity** hierarchies with structured table container safeguards to handle overflowing mobile content seamlessly.
-
-
-
----
-
-
+---------
 
 ## 🛠️ System Architecture & Stack
+**Frontend:** Semantic HTML5, Modular JavaScript (ES6+), and Clean CSS Variables (`:root` token mapping).
+**Database & Backend:** Supabase (Real-time DB & View Schemas).
+**Authentication:** Google OAuth explicitly restricted to an approved list of digital profiles.
+**Deployment Setup:** GitHub Pages serving production assets out of the `/PWMS2` routing base directory.
 
 
-
-***Frontend:** Semantic HTML5, Modular JavaScript (ES6+), and Clean CSS Variables (`:root` token mapping).
-
-***Database & Backend:** Supabase (Real-time DB & View Schemas).
-
-***Authentication:** Google OAuth explicitly restricted to an approved list of digital profiles.
-
-***Deployment Setup:** GitHub Pages serving production assets out of the `/PWMS2` routing base directory.
-
-
-
-------------------------------------
-
+=== === === === === ===
 Date : Sun, 28-Jun-2026
-
-------------------
-
-
+=== === === === === ===
 
 Release PWMS v1.5 ToDo Module
 
-
-
 • Added ToDo management module with activity-linked tasks.
-
 • Added Create, Edit, Delete and Complete/Open toggle functionality.
-
 • Added Due Date and Notes support.
-
 • Added inline Activity creation from ToDo modal.
-
 • Added ToDo grouping by Due Date buckets and Activity.
-
 • Added search, status and activity filters.
-
 • Added Open, Completed and Overdue summary counters.
-
 • Implemented click-to-edit and checkbox-based completion workflow.
-
 • Added responsive ToDo feed UI for desktop and mobile.
-
 • Reused Task Log activity framework while maintaining modular architecture.
-
 • Added support for Unicode delete icon (&#128465;&#65039; / &#128465; / 🗑 / 🗑️).
 
 
-
-
+=== === === === === ===
 Date : Sat, 27-Jun-2026
-------------------
+=== === === === === ===
 
 Release PWMS v1.4UI Mobile CSS Foundation Framework & Text Sizes
 
@@ -144,9 +113,9 @@ v1.3cUI
 • Standardized Task Log filtering across Grid and Card views.
 
 
-------------------
+=== === === === === ===
 Date : Fri, 26-Jun-2026
-------------------
+=== === === === === ===
 
 * Release PWMS v1.3bUI Touch-First Mobile CSS Optimization FONT
 
@@ -171,10 +140,8 @@ Outcome:
 • Retained multi-column responsive layout with improved readability.
 
 
----------
-
 * v1.3aUI Mobile Optimized Task Log Cards & Entry Modal
----------
+---------------------------
 
 • Responsive Task Log card layout with date grouping
 • Compact Task Entry modal redesign
@@ -186,14 +153,16 @@ Outcome:
 
 
 ** Release PWMS v1.2bUI TASK LOG FEED & MODAL REDESIGN
-
+---------------------------
 ** Release PWMS v1.2aUI TASK LOG FEED
-
+---------------------------
 ** Release PWMS v1.1UI with UI Menu Hide & Time Fields Calculation & Row
+---------------------------
 
 
 === === === === === ===
 Date : Fri, 26-Jun-2026
+=== === === === === ===
 
 Release : PWMS v1.0 Stable with URL path Logic..
 
@@ -208,36 +177,28 @@ Modules
 ✔ Review
 
 
-Backend
---------
-Supabase
+Backend: Supabase
+------------------
 
-Authentication
---------------
-Google OAuth
+Authentication: Google OAuth
+------------------
 
 Allowed Email Validation
-
-=========
-
-Deployment
-----------
-GitHub Pages
-
-
-==================
-Deployment Notes
-==================
-
-
 ------------------
+
+Deployment: GitHub Pages
+------------------
+
+Deployment Notes
+------------------
+
 Development (Local)
 ------------------
 * IIS / localhost
 * Site URL = localhost or LAN IP (eg. 192.168.1.8)
 
-==================
+------------------
 Production
-==================
+------------------
 * GitHub Pages
 * Site URL = GitHub Pages URL 'https://abhishekn-pwms.github.io/PWMSGG'
